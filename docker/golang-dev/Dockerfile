@@ -16,6 +16,7 @@ RUN mkdir -p /home/void/.vim/autoload /home/void/.vim/bundle && \
     go get golang.org/x/tools/refactor/eg && \
     go get golang.org/x/tools/refactor/importgraph && \
     go get golang.org/x/tools/refactor/satisfy && \
+    go get github.com/tools/godep && \
     curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim && \
     echo "execute pathogen#infect()\nsyntax on\nfiletype plugin indent on\n" > /home/void/.vimrc && \
     git clone https://github.com/fholgado/minibufexpl.vim.git /home/void/.vim/bundle/minibufexpl.vim && \
@@ -25,4 +26,8 @@ RUN mkdir -p /home/void/.vim/autoload /home/void/.vim/bundle && \
     git clone https://github.com/xolox/vim-misc.git /home/void/.vim/bundle/vim-misc && \
     git clone https://github.com/godoctor/godoctor.vim.git /home/void/.vim/bundle/godoctor.vim && \
     vim +GoInstallBinaries +qall && \
-    vim +GoDoctorInstall +qall
+    vim +GoDoctorInstall +qall && \
+    mkdir /home/void/go/src/github.com/derekparker && \
+    cd /home/void/go/src/github.com/derekparker && \
+    git clone https://github.com/derekparker/delve.git && \
+    cd delve && godep restore && make install
