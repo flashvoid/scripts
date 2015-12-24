@@ -8,7 +8,7 @@ die () {
 [[ $ROMANA_REPO ]]           || ROMANA_REPO="git@github.com:romana/romana.git"
 [[ $ROMANA_BRANCH ]]         || ROMANA_BRANCH="master"
 [[ $STACK_NAME ]]            || STACK_NAME=default
-[[ $AWS_ENCRYPTED_SECRET ]]  && AWS_SECRET_ACCESS_KEY=$(echo -e $AWS_ENCRYPTED_SECRET | openssl aes-256-cbc -a -d)
+[[ $AWS_ENCRYPTED_SECRET ]]  && export AWS_SECRET_ACCESS_KEY=$(echo -e $AWS_ENCRYPTED_SECRET | openssl aes-256-cbc -a -d)
 [[ $AWS_ACCESS_KEY_ID ]]     || die "Please provide AWS credentials to spin up CF template, use -e AWS_ACCESS_KEY_ID=<aws key id> -e AWS_SECRET_ACCESS_KEY=<aws key>" 2
 [[ $AWS_SECRET_ACCESS_KEY ]] || die "Please provide AWS credentials to spin up CF template, use -e AWS_ACCESS_KEY_ID=<aws key id> -e AWS_SECRET_ACCESS_KEY=<aws key>" 2
 
