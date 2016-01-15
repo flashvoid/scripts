@@ -5,8 +5,8 @@ sudo docker run -it \
     -v </path/to/gitkey>:/gitkey \
 	-v </path/to/ec2key>:/ec2key \
 	-e STACK_NAME=<test> \
-	-e AWS_ACCESS_KEY_ID=<AKIAJNTQUY2HWGT6SZAA> \
-	-e AWS_SECRET_ACCESS_KEY=<$AWS_SECRET> \
+	-e AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY> \
+	-e AWS_SECRET_ACCESS_KEY=<AWS_SECRET_KEY> \
 	flashvoid/romana-build install
 	
 # gitkey - is ssh key with access to romana git repo
