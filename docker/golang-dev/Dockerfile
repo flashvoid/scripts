@@ -1,9 +1,9 @@
 FROM golang
-MAINTAINER stas.kraev
+LABEL maintainer stas.kraev
 
 RUN apt-get update && apt-get install -y exuberant-ctags sudo vim-nox git screen && \
     useradd -m void -s /bin/bash -G sudo && \
-    sed -i 's/%sudo	ALL=(ALL:ALL) ALL/%sudo	ALL=(ALL:ALL) NOPASSWD:ALL/' /etc/sudoers
+    sed -i 's/%sudo.*ALL=(ALL:ALL).*ALL/%sudo ALL=(ALL:ALL) NOPASSWD:ALL/' /etc/sudoers
 
 USER void
 WORKDIR /home/void
@@ -11,14 +11,17 @@ WORKDIR /home/void
 ENV GOPATH="/home/void/go"
 ENV PATH="/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/void/go/bin"
 
+ADD vimrc /home/void/.vimrc
 RUN mkdir -p /home/void/.vim/autoload /home/void/.vim/bundle && \
+    sudo chown void /home/void/.vimrc && \
     go get golang.org/x/tools/cmd/gorename && \
     go get golang.org/x/tools/refactor/eg && \
     go get golang.org/x/tools/refactor/importgraph && \
     go get golang.org/x/tools/refactor/satisfy && \
-    go get github.com/tools/godep && \
+    go get github.com/fatih/gomodifytags && \
+    go get github.com/zmb3/gogetdoc && \
+    go get github.com/josharian/impl && \
     curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim && \
-    echo "execute pathogen#infect()\nsyntax on\nfiletype plugin indent on\n" > /home/void/.vimrc && \
     git clone https://github.com/fholgado/minibufexpl.vim.git /home/void/.vim/bundle/minibufexpl.vim && \
     git clone https://github.com/majutsushi/tagbar.git /home/void/.vim/bundle/tagbar && \
     git clone https://github.com/xolox/vim-easytags.git /home/void/.vim/bundle/vim-easytags && \
@@ -26,8 +29,4 @@ RUN mkdir -p /home/void/.vim/autoload /home/void/.vim/bundle && \
     git clone https://github.com/xolox/vim-misc.git /home/void/.vim/bundle/vim-misc && \
     git clone https://github.com/godoctor/godoctor.vim.git /home/void/.vim/bundle/godoctor.vim && \
     vim +GoInstallBinaries +qall && \
-    vim +GoDoctorInstall +qall && \
-    mkdir /home/void/go/src/github.com/derekparker && \
-    cd /home/void/go/src/github.com/derekparker && \
-    git clone https://github.com/derekparker/delve.git && \
-    cd delve && godep restore && make install
+    vim +GoDoctorInstall +qall
