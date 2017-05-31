@@ -21,6 +21,7 @@ RUN mkdir -p /home/void/.vim/autoload /home/void/.vim/bundle && \
     go get github.com/fatih/gomodifytags && \
     go get github.com/zmb3/gogetdoc && \
     go get github.com/josharian/impl && \
+    go get github.com/derekparker/delve/cmd/dlv && \
     curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim && \
     git clone https://github.com/fholgado/minibufexpl.vim.git /home/void/.vim/bundle/minibufexpl.vim && \
     git clone https://github.com/majutsushi/tagbar.git /home/void/.vim/bundle/tagbar && \
@@ -28,5 +29,6 @@ RUN mkdir -p /home/void/.vim/autoload /home/void/.vim/bundle && \
     git clone https://github.com/fatih/vim-go.git /home/void/.vim/bundle/vim-go && \
     git clone https://github.com/xolox/vim-misc.git /home/void/.vim/bundle/vim-misc && \
     git clone https://github.com/godoctor/godoctor.vim.git /home/void/.vim/bundle/godoctor.vim && \
+    git clone https://github.com/SirVer/ultisnips /home/void/.vim/bundle/ultisnips && \
     vim +GoInstallBinaries +qall && \
     vim +GoDoctorInstall +qall
