@@ -30,5 +30,6 @@ RUN mkdir -p /home/void/.vim/autoload /home/void/.vim/bundle && \
     git clone https://github.com/xolox/vim-misc.git /home/void/.vim/bundle/vim-misc && \
     git clone https://github.com/godoctor/godoctor.vim.git /home/void/.vim/bundle/godoctor.vim && \
     git clone https://github.com/SirVer/ultisnips /home/void/.vim/bundle/ultisnips && \
+    git clone https://github.com/terryma/vim-multiple-cursors /home/void/.vim/bundle/vim-multiple-cursors && \
     vim +GoInstallBinaries +qall && \
     vim +GoDoctorInstall +qall
