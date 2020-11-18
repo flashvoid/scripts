@@ -32,3 +32,9 @@ function! Multiple_cursors_after()
   endif
 endfunction
 
+" learning  jk map instead of esc
+:inoremap jk <esc>
+
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_gorename_command = 'gopls'
